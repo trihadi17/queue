@@ -21,12 +21,12 @@ class QueueModel {
   });
 
   QueueModel.fromJson(Map<String, dynamic> json) {
-    queueNumber = json['queueNumber'];
-    customerPax = json['customerPax'];
+    queueNumber = json['no'];
+    customerPax = json['pax'];
     customerName = json['customerName'];
     customerPhone = json['customerPhone'];
     storeName = json['storeName'];
-    dateIn = json['dateIn'];
+    dateIn = DateTime.fromMillisecondsSinceEpoch(json['dateIn']);
     dateConfirm = json['dateConfirm'];
     storeId = json['storeId'];
     id = json['id'];

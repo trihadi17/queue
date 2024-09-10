@@ -57,6 +57,29 @@ class QueueProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // Get Information From Phone
+  Future<void> findQueue(String phone) async {
+    // URL
+    Uri url = Uri.parse('$baseUrl/stores/16880?phone-number=${phone}&limit=1');
+
+    // Request
+    var response = await http.get(
+      url,
+    );
+
+    if (response.statusCode == 200) {
+      // Variable
+      var data = jsonDecode(response.body)['queueHistory'];
+
+      // Parse data to Model
+      QueueModel dataQueue = QueueModel.fromJson(data[0]);
+    } else {
+      throw Exception('Failed to get');
+    }
+
+    notifyListeners();
+  }
+
   //Add Queue
   Future<void> addQueue(String name, String whatsApp, int pax) async {
     // URL

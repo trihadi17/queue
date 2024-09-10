@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 // Packages
 import 'package:google_fonts/google_fonts.dart';
 
+// Model
+import 'package:queue/models/queue.dart';
+
 // Provider
 import 'package:provider/provider.dart';
 
@@ -45,6 +48,9 @@ class _QueuePageState extends State<QueuePage> {
   Widget build(BuildContext context) {
     // Provider
     QueueProvider queueProvider = Provider.of<QueueProvider>(context);
+
+    // Get Data Model
+    final QueueModel queueModel;
 
     // Phone Input
     Widget phoneInput() {
@@ -108,6 +114,11 @@ class _QueuePageState extends State<QueuePage> {
       );
     }
 
+    // Information Card (Queue)
+    Widget informationCard() {
+      return Text('data');
+    }
+
     // Submit Button
     Widget buttonSubmit() {
       return Column(
@@ -126,11 +137,8 @@ class _QueuePageState extends State<QueuePage> {
                   Future.delayed(
                     Duration(seconds: 2),
                     () {
-                      // Add Provider
-                      // queueProvider.addQueue(
-                      //     _nameController.text,
-                      //     _phoneController.text,
-                      //     int.parse(_paxController.text));
+                      // Find Antrian(Queue)
+                      queueProvider.findQueue(_phoneController.text);
 
                       // nonaktifkan widget loading
                       setState(() {
@@ -182,6 +190,10 @@ class _QueuePageState extends State<QueuePage> {
                 height: 10,
               ),
               buttonSubmit(),
+              SizedBox(
+                height: 10,
+              ),
+              informationCard(),
             ],
           ),
         ),
